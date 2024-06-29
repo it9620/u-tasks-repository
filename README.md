@@ -1,4 +1,4 @@
-# pg_service_template
+# u_tasks_repository
 
 Template of a C++ service that uses [userver framework](https://github.com/userver-framework/userver) with PostgreSQL.
 
@@ -9,8 +9,8 @@ To create your own userver-based service follow the following steps:
 
 1. Press the green "Use this template button" at the top of this github page
 2. Clone the service `git clone your-service-repo && cd your-service-repo`
-3. Give a propper name to your service and replace all the occurences of "pg_service_template" string with that name
-   (could be done via `find . -not -path "./third_party/*" -not -path ".git/*" -not -path './build_*' -type f | xargs sed -i 's/pg_service_template/YOUR_SERVICE_NAME/g'`).
+3. Give a propper name to your service and replace all the occurences of "u_tasks_repository" string with that name
+   (could be done via `find . -not -path "./third_party/*" -not -path ".git/*" -not -path './build_*' -type f | xargs sed -i 's/u_tasks_repository/YOUR_SERVICE_NAME/g'`).
 4. Feel free to tweak, adjust or fully rewrite the source code of your service.
 
 
@@ -45,3 +45,13 @@ Edit `Makefile.local` to change the default configuration and build options.
 The original template is distributed under the [Apache-2.0 License](https://github.com/userver-framework/userver/blob/develop/LICENSE)
 and [CLA](https://github.com/userver-framework/userver/blob/develop/CONTRIBUTING.md). Services based on the template may change
 the license and CLA.
+
+## Other installs
+
+```sh
+# some library:
+sudo apt update && sudo apt install libkrb5-dev libldap2-dev
+
+# Install postgres libraries:
+sudo apt install libpq-dev postgresql-server-dev-16
+```

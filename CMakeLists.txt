@@ -1,6 +1,45 @@
 cmake_minimum_required(VERSION 3.12)
-project(pg_service_template CXX)
+project(u_tasks_repository CXX)
 
+
+###################################################################################################
+# Fetch CPM if not already present
+if(NOT EXISTS "${CMAKE_BINARY_DIR}/cmake/CPM.cmake")
+    file(DOWNLOAD
+        https://github.com/cpm-cmake/CPM.cmake/releases/latest/download/cpm.cmake
+        "${CMAKE_BINARY_DIR}/cmake/CPM.cmake"
+    )
+endif()
+
+# Add CPM / Include CPM
+#include(cmake/CPM.cmake)
+include("${CMAKE_BINARY_DIR}/cmake/CPM.cmake")
+
+###################################################################################################
+# Set Protobuf and gRPC directories
+set(Protobuf_DIR "/usr/local/lib/cmake/protobuf")
+set(gRPC_DIR "/usr/local/lib/cmake/grpc")
+
+find_package(Protobuf REQUIRED)
+find_package(gRPC REQUIRED)
+
+include_directories(${Protobuf_INCLUDE_DIRS} ${gRPC_INCLUDE_DIRS})
+message(STATUS "Using Protobuf ${Protobuf_VERSION}")
+
+
+###################################################################################################
+# Run userver build:
+CPMAddPackage(
+    NAME userver
+    #VERSION (userver release version or git commit hash)
+    #GIT_TAG ("v2.1")
+    GIT_TAG bb713ea
+
+    #GIT_REPOSITORY https://github.com/userver-framework/userver.git
+    GITHUB_REPOSITORY userver-framework/userver
+    OPTIONS
+    "USERVER_FEATURE_GRPC ON"
+)
 
 # Adding userver dependency
 find_package(userver COMPONENTS core postgresql QUIET)

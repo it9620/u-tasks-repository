@@ -63,6 +63,7 @@ Task atributes:
 - DaysFact
 - DaysPlan
 - SnoozeDays
+- Tags
 
 Subtask atribute:
 - id
@@ -121,9 +122,8 @@ Tags atributes:
 
 - Create a project
 - Optionaly add a milestones
-- Create new task and add some subtasks:
-    1. Create a task;
-    2. Add a subtasks to task.
+- Create new task
+- Optionaly add some subtasks to a task
 - Change task status
 - Change subtask status
 - Delete a task

@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS u_tasks_repository.users_data (
 CREATE TABLE IF NOT EXISTS u_tasks_repository.users_logins (
     id UUID PRIMARY KEY,
     user_name VARCHAR(50) NOT NULL,
-    password VARCHAR(100) NOT NULL,
+    password_hash VARCHAR(128) NOT NULL,
     role u_tasks_repository.role DEFAULT 'user'
 );
 

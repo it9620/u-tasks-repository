@@ -39,6 +39,7 @@ CPMAddPackage(
     GITHUB_REPOSITORY userver-framework/userver
     OPTIONS
     "USERVER_FEATURE_GRPC ON"
+    "USERVER_FEATURE_POSTGRESQL"
 )
 
 # Adding userver dependency

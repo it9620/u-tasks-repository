@@ -3,10 +3,17 @@
 #include <fmt/format.h>
 
 #include <userver/clients/dns/component.hpp>
+
 #include <userver/components/component.hpp>
+
 #include <userver/server/handlers/http_handler_base.hpp>
+
 #include <userver/storages/postgres/cluster.hpp>
 #include <userver/storages/postgres/component.hpp>
+#include <userver/storages/postgres/options.hpp>
+#include <userver/storages/postgres/dsn.hpp>
+#include <userver/storages/postgres/cluster_types.hpp>
+
 #include <userver/utils/assert.hpp>
 
 namespace u_tasks_repository {
@@ -14,20 +21,42 @@ namespace u_tasks_repository {
 namespace {
 
 class Hello final : public userver::server::handlers::HttpHandlerBase {
- public:
+
+public:
   static constexpr std::string_view kName = "handler-hello";
 
-  Hello(const userver::components::ComponentConfig& config,
-        const userver::components::ComponentContext& component_context)
-      : HttpHandlerBase(config, component_context),
-        pg_cluster_(
-            component_context
-                .FindComponent<userver::components::Postgres>("postgres-db-1")
-                .GetCluster()) {}
+  Hello(
+    const userver::components::ComponentConfig& config,
+    const userver::components::ComponentContext& component_context)
+    : HttpHandlerBase(config, component_context)
+    , pg_cluster_(
+      component_context
+      .FindComponent<userver::components::Postgres>("postgres-db-1")
+      .GetCluster())
+  {
+    constexpr auto kCreateShema =
+      R"~(
+        CREATE SCHEMA IF NOT EXISTS hello_schema;
+      )~";
+
+    constexpr auto kCreateTable =
+      R"~(
+        CREATE TABLE IF NOT EXISTS hello_schema.users (
+          name VARCHAR PRIMARY KEY,
+          count INT NOT NULL
+        )
+      )~";
+
+    using userver::storages::postgres::ClusterHostType;
+    pg_cluster_->Execute(ClusterHostType::kMaster, kCreateShema);
+    pg_cluster_->Execute(ClusterHostType::kMaster, kCreateTable);
+
+  }
 
   std::string HandleRequestThrow(
       const userver::server::http::HttpRequest& request,
-      userver::server::request::RequestContext&) const override {
+      userver::server::request::RequestContext&) const override
+  {
     const auto& name = request.GetArg("name");
 
     auto user_type = UserType::kFirstTime;

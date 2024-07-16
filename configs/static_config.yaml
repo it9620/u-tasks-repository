@@ -2,24 +2,28 @@ components_manager:
     task_processors:                  # Task processor is an executor for coroutine tasks
 
         main-task-processor:          # Make a task processor for CPU-bound couroutine tasks.
-            worker_threads: $worker-threads         # Process tasks in 4 threads.
+            worker_threads: 2
+            #worker_threads: $worker-threads         # Process tasks in 4 threads.
 
         fs-task-processor:            # Make a separate task processor for filesystem bound tasks.
-            worker_threads: $worker-fs-threads
+            #worker_threads: $worker-fs-threads
+            worker_threads: 2
 
     default_task_processor: main-task-processor
 
     components:                       # Configuring components that were registered via component_list
         server:
             listener:                 # configuring the main listening socket...
-                port: $server-port            # ...to listen on this port and...
+                #port: $server-port            # ...to listen on this port and...
+                port: 8080            # ...to listen on this port and...
                 task_processor: main-task-processor    # ...process incoming requests on this task processor.
         logging:
             fs-task-processor: fs-task-processor
             loggers:
                 default:
                     file_path: '@stderr'
-                    level: $logger-level
+                    #level: $logger-level
+                    level: debug
                     overflow_behavior: discard  # Drop logs if the system is too busy to write them down.
 
         # Dynamic config options. Cache is disabled, updates are disabled.
@@ -56,7 +60,8 @@ components_manager:
             task_processor: main-task-processor  # Run it on CPU bound task processor
 
         postgres-db-1:
-            dbconnection: $dbconnection
+            #dbconnection: $dbconnection
+            dbconnection: 'postgresql://u_tasks_server:1BEyhMioH{[71K;a@localhost:5432/u_tasks_repository_db_1'
             blocking_task_processor: fs-task-processor
             dns_resolver: async
             sync-start: false

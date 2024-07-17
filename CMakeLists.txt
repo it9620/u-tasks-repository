@@ -16,18 +16,6 @@ endif()
 include("${CMAKE_BINARY_DIR}/cmake/CPM.cmake")
 
 ###################################################################################################
-# Set Protobuf and gRPC directories
-set(Protobuf_DIR "/usr/local/lib/cmake/protobuf")
-set(gRPC_DIR "/usr/local/lib/cmake/grpc")
-
-find_package(Protobuf REQUIRED)
-find_package(gRPC REQUIRED)
-
-include_directories(${Protobuf_INCLUDE_DIRS} ${gRPC_INCLUDE_DIRS})
-message(STATUS "Using Protobuf ${Protobuf_VERSION}")
-
-
-###################################################################################################
 # Run userver build:
 CPMAddPackage(
     NAME userver

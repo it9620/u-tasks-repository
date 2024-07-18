@@ -165,6 +165,13 @@ cmake --build .
 ./u_tasks_repository -c ../configs/static_config.yaml
 
 # or by make <command>
+
+# Run benchmarks with command:
+./u_tasks_repository_benchmark
+
+# Run unittests with command:
+./u_tasks_repository_unittest
+
 ```
 
 ---

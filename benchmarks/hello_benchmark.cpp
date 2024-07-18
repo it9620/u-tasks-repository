@@ -8,17 +8,18 @@
 #include <userver/engine/run_standalone.hpp>
 
 void HelloBenchmark(benchmark::State& state) {
-  userver::engine::RunStandalone([&] {
-    constexpr std::string_view kNames[] = {"userver", "is", "awesome", "!"};
-    std::uint64_t i = 0;
+    userver::engine::RunStandalone([&] {
+        
+        constexpr std::string_view kNames[] = {"userver", "is", "awesome", "!"};
+        
+        std::uint64_t i = 0;
 
-    for (auto _ : state) {
-      const auto name = kNames[i++ % std::size(kNames)];
-      auto result = u_tasks_repository::SayHelloTo(
-          name, u_tasks_repository::UserType::kFirstTime);
-      benchmark::DoNotOptimize(result);
-    }
-  });
+        for (auto _ : state) {
+            const auto name = kNames[i++ % std::size(kNames)];
+            auto result = u_tasks_repository::SayHelloTo(name, u_tasks_repository::UserType::kFirstTime);
+            benchmark::DoNotOptimize(result);
+        }
+    });
 }
 
 BENCHMARK(HelloBenchmark);

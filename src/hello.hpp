@@ -14,6 +14,6 @@ enum class UserType {
 
 std::string SayHelloTo(std::string_view name, UserType type);
 
-void AppendHello(userver::components::ComponentList& component_list);
+void AppendHandlerApi(userver::components::ComponentList& component_list);
 
 }  // namespace u_tasks_repository

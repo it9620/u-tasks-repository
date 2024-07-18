@@ -1,0 +1,8 @@
+{
+    "cmake.configureOnOpen": false,
+    "editor.tabSize": 4, // Default tab size
+    "[yaml]": {
+        "editor.tabSize": 2,
+        "editor.insertSpaces": true
+    }
+}

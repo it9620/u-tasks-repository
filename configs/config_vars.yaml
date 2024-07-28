@@ -6,5 +6,4 @@ is-testing: false
 
 server-port: 8080
 
-#dbconnection: 'postgresql://u_tasks_repository_user:password@localhost:5432/u_tasks_repository_db_1'
 dbconnection: 'postgresql://u_tasks_server:1BEyhMioH{[71K;a@localhost:5432/u_tasks_repository_db_1'

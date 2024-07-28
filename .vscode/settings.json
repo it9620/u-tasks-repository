@@ -4,5 +4,9 @@
     "[yaml]": {
         "editor.tabSize": 2,
         "editor.insertSpaces": true
-    }
+    },
+    "editor.wordWrap": "wordWrapColumn",
+    "editor.wordWrapColumn": 100,
+    "editor.rulers": [100]
+
 }

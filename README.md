@@ -220,3 +220,15 @@ exit # close the session
 Use connection link:
 `postgresql://u_tasks_server:1BEyhMioH{[71K;a@localhost:5432/u_tasks_repository_db_1`
 
+### Run with static handler
+
+To run with static handler, you need define an evironment variable `USERVER_FILES_CONTENT_TYPE_MAP`:
+
+```sh
+export USERVER_FILES_CONTENT_TYPE_MAP=".html=text/html,.css=text/css,.js=application/javascript,.png=image/png,.jpg=image/jpeg,.jpeg=image/jpeg,.gif=image/gif,.svg=image/svg+xml"
+```
+
+To verify that the environment variable is set correctly run command:
+`echo $USERVER_FILES_CONTENT_TYPE_MAP`
+
+---

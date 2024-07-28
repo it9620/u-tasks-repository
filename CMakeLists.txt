@@ -54,8 +54,10 @@ userver_setup_environment()
 
 # Common sources
 add_library(${PROJECT_NAME}_objs OBJECT
-    src/hello.hpp
-    src/hello.cpp
+    src/handler_api/handler_api.hpp
+    src/handler_api/handler_api.cpp
+    #src/handler_static/handler_static.h
+    #src/handler_static/handler_static.cpp
 )
 target_link_libraries(${PROJECT_NAME}_objs PUBLIC userver::postgresql)
 
